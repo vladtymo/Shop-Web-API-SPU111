@@ -25,8 +25,9 @@ namespace Shop_api_spu111.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetByIdFromRoute([FromRoute] int id) // [FromQuery] [FromFrom]...
         {
+            Console.WriteLine("Route....");
             var item = ctx.Products.Find(id);
 
             if (item == null) return NotFound();
@@ -35,7 +36,7 @@ namespace Shop_api_spu111.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        public IActionResult Create([FromBody] Product model)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -46,7 +47,7 @@ namespace Shop_api_spu111.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(Product model)
+        public IActionResult Edit([FromBody] Product model)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -56,8 +57,8 @@ namespace Shop_api_spu111.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
         {
             var item = ctx.Products.Find(id);
 

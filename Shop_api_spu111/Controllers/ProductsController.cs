@@ -1,4 +1,6 @@
-﻿using DataAccess.Data;
+﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
+using DataAccess.Data;
 using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +11,11 @@ namespace Shop_api_spu111.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ShopSPUDbContext ctx;
+        private readonly IProductsService productsService;
 
-        public ProductsController(ShopSPUDbContext ctx)
+        public ProductsController(IProductsService productsService)
         {
-            this.ctx = ctx;
+            this.productsService = productsService;
         }
 
         //[HttpGet]                     // GET ~/api/products
@@ -21,18 +23,13 @@ namespace Shop_api_spu111.Controllers
         //[HttpGet("/all-products")]    // GET ~/all-products
         public IActionResult Get()
         {
-            return Ok(ctx.Products.ToList()); // status: 200
+            return Ok(productsService.Get()); // status: 200
         }
 
         [HttpGet("{id}")]
         public IActionResult GetByIdFromRoute([FromRoute] int id) // [FromQuery] [FromFrom]...
         {
-            Console.WriteLine("Route....");
-            var item = ctx.Products.Find(id);
-
-            if (item == null) return NotFound();
-
-            return Ok(item);
+            return Ok(productsService.Get(id));
         }
 
         [HttpPost]
@@ -40,8 +37,7 @@ namespace Shop_api_spu111.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            ctx.Products.Add(model);
-            ctx.SaveChanges();
+            productsService.Create(model);
 
             return Ok();
         }
@@ -51,8 +47,7 @@ namespace Shop_api_spu111.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            ctx.Products.Update(model);
-            ctx.SaveChanges();
+            productsService.Edit(model);
 
             return Ok();
         }
@@ -60,13 +55,7 @@ namespace Shop_api_spu111.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var item = ctx.Products.Find(id);
-
-            if (item == null) return NotFound();
-
-            ctx.Products.Remove(item);
-            ctx.SaveChanges();
-
+            productsService.Delete(id);
             return Ok();
         }
     }

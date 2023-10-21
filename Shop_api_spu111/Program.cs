@@ -1,3 +1,5 @@
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +13,9 @@ builder.Services.AddControllers();
 
 // configure dependencies
 builder.Services.AddDbContext<ShopSPUDbContext>(opts => opts.UseSqlServer(connStr));
+
+// Configure services
+builder.Services.AddScoped<IProductsService, ProductsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

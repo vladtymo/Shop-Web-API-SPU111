@@ -3,6 +3,7 @@ using BusinessLogic.ApiModels.Products;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace BusinessLogic.Services
 
         public List<Product> Get()
         {
-            return ctx.Products.ToList();
+            return ctx.Products.Include(x => x.Category).ToList();
         }
 
         public Product? Get(int id)

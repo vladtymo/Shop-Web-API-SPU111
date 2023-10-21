@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels.Products;
+using BusinessLogic.Dtos;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
@@ -52,34 +53,23 @@ namespace BusinessLogic.Services
 
         public void Edit(EditProductModel product)
         {
-            //var entity = new Product()
-            //{
-            //    Id = product.Id,
-            //    Name = product.Name,
-            //    CategoryId = product.CategoryId,
-            //    Description = product.Description,
-            //    Discount = product.Discount,
-            //    ImageUrl = product.ImageUrl,
-            //    InStock = product.InStock,
-            //    Price = product.Price
-            //};
-
             ctx.Products.Update(mapper.Map<Product>(product));
             ctx.SaveChanges();
         }
 
-        public List<Product> Get()
+        public List<ProductDto> Get()
         {
-            return ctx.Products.Include(x => x.Category).ToList();
+            var items = ctx.Products.Include(x => x.Category).ToList();
+            return mapper.Map<List<ProductDto>>(items);
         }
 
-        public Product? Get(int id)
+        public ProductDto? Get(int id)
         {
             var item = ctx.Products.Find(id);
 
             if (item == null) return null;
 
-            return item;
+            return mapper.Map<ProductDto>(item);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Interfaces;
+﻿using AutoMapper;
+using BusinessLogic.ApiModels.Products;
+using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
 using System;
@@ -12,15 +14,28 @@ namespace BusinessLogic.Services
     public class ProductsService : IProductsService
     {
         private readonly ShopSPUDbContext ctx;
+        private readonly IMapper mapper;
 
-        public ProductsService(ShopSPUDbContext ctx)
+        public ProductsService(ShopSPUDbContext ctx, IMapper mapper)
         {
             this.ctx = ctx;
+            this.mapper = mapper;
         }
 
-        public void Create(Product product)
+        public void Create(CreateProductModel product)
         {
-            ctx.Products.Add(product);
+            //var entity = new Product()
+            //{
+            //    Name = product.Name,
+            //    CategoryId = product.CategoryId,
+            //    Description = product.Description,
+            //    Discount = product.Discount,
+            //    ImageUrl = product.ImageUrl,
+            //    InStock = product.InStock,
+            //    Price = product.Price
+            //};
+
+            ctx.Products.Add(mapper.Map<Product>(product));
             ctx.SaveChanges();
         }
 
@@ -34,9 +49,21 @@ namespace BusinessLogic.Services
             ctx.SaveChanges();
         }
 
-        public void Edit(Product product)
+        public void Edit(EditProductModel product)
         {
-            ctx.Products.Update(product);
+            //var entity = new Product()
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    CategoryId = product.CategoryId,
+            //    Description = product.Description,
+            //    Discount = product.Discount,
+            //    ImageUrl = product.ImageUrl,
+            //    InStock = product.InStock,
+            //    Price = product.Price
+            //};
+
+            ctx.Products.Update(mapper.Map<Product>(product));
             ctx.SaveChanges();
         }
 

@@ -2,6 +2,7 @@ using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using Shop_api_spu111.Middlewares;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

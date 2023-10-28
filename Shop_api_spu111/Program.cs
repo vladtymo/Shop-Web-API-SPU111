@@ -1,6 +1,8 @@
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
+using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop_api_spu111.Middlewares;
 using System.Text.Json.Serialization;
@@ -17,8 +19,13 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 // configure dependencies
 builder.Services.AddDbContext<ShopSPUDbContext>(opts => opts.UseSqlServer(connStr));
 
+builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ShopSPUDbContext>()
+                .AddDefaultTokenProviders();
+
 // Configure services
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

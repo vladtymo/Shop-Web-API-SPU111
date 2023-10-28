@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
-    public class ShopSPUDbContext : DbContext
+    public class ShopSPUDbContext : IdentityDbContext<User>
     {
         public ShopSPUDbContext() { }
         public ShopSPUDbContext(DbContextOptions options) : base(options) { }

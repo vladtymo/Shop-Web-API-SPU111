@@ -2,6 +2,7 @@ using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop_api_spu111.Middlewares;
@@ -24,6 +25,8 @@ builder.Services.AddIdentity<User, IdentityRole>()
                 .AddDefaultTokenProviders();
 
 // Configure services
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

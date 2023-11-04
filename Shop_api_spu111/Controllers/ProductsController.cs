@@ -16,6 +16,7 @@ namespace Shop_api_spu111.Controllers
             this.productsService = productsService;
         }
 
+        [Authorize]
         //[HttpGet]                     // GET ~/api/products
         [HttpGet("all")]                // GET ~/api/products/all
         //[HttpGet("/all-products")]    // GET ~/all-products

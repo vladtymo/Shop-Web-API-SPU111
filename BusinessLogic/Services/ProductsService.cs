@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using BusinessLogic.ApiModels.Products;
 using BusinessLogic.Dtos;
+using BusinessLogic.Entities;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
-using DataAccess.Data;
-using DataAccess.Data.Entities;
-using DataAccess.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using BusinessLogic.Repositories;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {

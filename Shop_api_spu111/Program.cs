@@ -1,7 +1,8 @@
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces;
+using BusinessLogic.Repositories;
 using BusinessLogic.Services;
 using DataAccess.Data;
-using DataAccess.Data.Entities;
 using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

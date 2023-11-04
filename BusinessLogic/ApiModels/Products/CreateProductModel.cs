@@ -1,11 +1,4 @@
-﻿using DataAccess.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLogic.ApiModels.Products
+﻿namespace BusinessLogic.ApiModels.Products
 {
     public class CreateProductModel
     {

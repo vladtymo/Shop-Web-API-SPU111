@@ -69,6 +69,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// apply migrations
 using (var scope = app.Services.CreateScope())
 {
    var db = scope.ServiceProvider.GetRequiredService<ShopSPUDbContext>();

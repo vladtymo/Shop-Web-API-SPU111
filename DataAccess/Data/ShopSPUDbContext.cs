@@ -12,7 +12,7 @@ namespace DataAccess.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=tcp:vladtestserver.database.windows.net,1433;Initial Catalog=shopapispu111db;Persist Security Info=False;User ID=admin1;Password=Qwer1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Server=tcp:vladtestserver.database.windows.net,1433;Initial Catalog=apidbvpd;Persist Security Info=False;User ID=admin1;Password=Qwer1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
